@@ -8,5 +8,6 @@ WORKDIR /db
 ADD . /db
 RUN /etc/init.d/mysql start && mysqladmin -u root password root
 RUN /etc/init.d/mysql start && mysql -uroot -proot < dump.sql
+RUN /etc/init.d/mysql start && mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;"
 EXPOSE 3306
 CMD ["mysqld"]
